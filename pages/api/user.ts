@@ -30,7 +30,7 @@ const endpoint = async (req: NextApiRequest, res: NextApiResponse<DefaultMessage
             return res.status(400).json({ error: 'Email não é válido' });
         }
 
-        if(!user.password || user.password.length < 6){
+        if(!user.newPassword || user.newPassword.length < 6){
             return res.status(400).json({ error: 'Senha não é válida' });
         }
 
@@ -39,7 +39,7 @@ const endpoint = async (req: NextApiRequest, res: NextApiResponse<DefaultMessage
             return res.status(400).json({ error: 'Email já cadastrado' });
         }
 
-        user.password = CryptoJS.AES.encrypt(user.password, MY_SECRET_KEY).toString();
+        user.newPassword = CryptoJS.AES.encrypt(user.newPassword, MY_SECRET_KEY).toString();
 
         await UserModel.create(user);
         return res.status(200).json({ msg: 'Usuário cadastrado com sucesso.' });

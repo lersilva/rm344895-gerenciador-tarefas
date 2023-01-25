@@ -33,7 +33,7 @@ const loginEndpoint = async function (requisicao: NextApiRequest, resposta: Next
         }
 
         const user = existsUserWithEmail[0] as User;
-        const bytes  = CryptoJS.AES.decrypt(user.password, MY_SECRET_KEY);
+        const bytes  = CryptoJS.AES.decrypt(user.newPassword, MY_SECRET_KEY);
         const savedPassword = bytes.toString(CryptoJS.enc.Utf8);
 
         if (password === savedPassword) {
